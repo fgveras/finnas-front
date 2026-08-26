@@ -6,6 +6,25 @@
 
 <div class="finnas-body">
     <div class="d-flex gap-3">
- 
+        <table class="table table-hover table-striped table-component">
+            <thead class="table-header">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Credor</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(i of list; track i){
+                    <tr innerRows>
+                        <th scope="row"> {{ i.codigo }} </th>
+                        <td> {{ i.titulo }} </td>
+                        <td> {{ i.valor | currency: 'BRL' }} </td>
+                        <td> {{ i.titulo }} </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
 </div>
