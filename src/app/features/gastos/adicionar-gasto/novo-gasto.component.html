@@ -1,0 +1,123 @@
+<div class="tela">
+  <header class="cabecalho">
+    <p class="cabecalho__etiqueta">Controle mensal</p>
+    <h1 class="cabecalho__titulo">Novo gasto</h1>
+
+    <div class="ticker" [class.ticker--pulsando]="totalPulsando()">
+      <span class="ticker__rotulo">Total lançado neste mês</span>
+      <span class="ticker__valor">{{ totalDoMes() | currency: 'BRL' }}</span>
+    </div>
+  </header>
+
+  <section class="recibo">
+    <form class="formulario" [formGroup]="form" (ngSubmit)="adicionarGasto()" novalidate>
+      <div class="campo">
+        <label for="descricao">Descrição</label>
+        <input
+          id="descricao"
+          type="text"
+          formControlName="descricao"
+          placeholder="Ex.: Assinatura de internet"
+          autocomplete="off"
+        />
+        @if (descricaoCtrl.invalid && descricaoCtrl.touched) {
+          <span class="erro">Informe uma descrição com pelo menos 3 letras.</span>
+        }
+      </div>
+
+      <div class="campo campo--valor">
+        <label for="valor">Valor</label>
+        <div class="campo__prefixo">
+          <span>R$</span>
+          <input
+            id="valor"
+            type="number"
+            formControlName="valor"
+            placeholder="0,00"
+            min="0.01"
+            step="0.01"
+            inputmode="decimal"
+          />
+        </div>
+        @if (valorCtrl.invalid && valorCtrl.touched) {
+          <span class="erro">Informe um valor maior que zero.</span>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="data">Data</label>
+        <input id="data" type="date" formControlName="data" />
+        @if (dataCtrl.invalid && dataCtrl.touched) {
+          <span class="erro">Selecione a data do gasto.</span>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="credor">Credor</label>
+        <select id="credor" formControlName="credorId">
+          <option [ngValue]="null" disabled>Selecione quem recebe</option>
+          @for (credor of credores; track credor.id) {
+            <option [ngValue]="credor.id">{{ credor.nome }}</option>
+          }
+        </select>
+        @if (credorCtrl.invalid && credorCtrl.touched) {
+          <span class="erro">Selecione o credor.</span>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="formaPagamento">Forma de pagamento</label>
+        <select id="formaPagamento" formControlName="formaPagamentoId">
+          <option [ngValue]="null" disabled>Selecione a forma de pagamento</option>
+          @for (forma of formasPagamento; track forma.id) {
+            <option [ngValue]="forma.id">{{ forma.nome }}</option>
+          }
+        </select>
+        @if (formaPagamentoCtrl.invalid && formaPagamentoCtrl.touched) {
+          <span class="erro">Selecione a forma de pagamento.</span>
+        }
+      </div>
+
+      <label class="alternador">
+        <input type="checkbox" formControlName="recorrente" />
+        <span class="alternador__trilho" aria-hidden="true"></span>
+        <span class="alternador__texto">Repetir todo mês</span>
+      </label>
+
+      <button type="submit" class="botao-adicionar">Lançar gasto</button>
+    </form>
+  </section>
+
+  @if (gastos().length > 0) {
+    <section class="lista" aria-label="Gastos lançados neste mês">
+      @for (gasto of gastos(); track gasto.id) {
+        <article class="linha">
+          <div class="linha__principal">
+            <span class="linha__descricao">{{ gasto.descricao }}</span>
+            <span class="linha__valor">{{ gasto.valor | currency: 'BRL' }}</span>
+          </div>
+          <div class="linha__detalhes">
+            <span>{{ gasto.data | date: 'dd/MM/yyyy' }}</span>
+            <span class="linha__ponto" aria-hidden="true">·</span>
+            <span>{{ nomeCredor(gasto.credorId) }}</span>
+            <span class="linha__ponto" aria-hidden="true">·</span>
+            <span>{{ nomeFormaPagamento(gasto.formaPagamentoId) }}</span>
+            @if (gasto.recorrente) {
+              <span class="linha__selo">mensal</span>
+            }
+          </div>
+          <button
+            type="button"
+            class="linha__remover"
+            (click)="removerGasto(gasto.id)"
+            [attr.aria-label]="'Remover ' + gasto.descricao"
+          >
+            ×
+          </button>
+        </article>
+      }
+    </section>
+  } @else {
+    <p class="vazio">Nenhum gasto lançado ainda. Preencha o formulário acima para começar.</p>
+  }
+</div>

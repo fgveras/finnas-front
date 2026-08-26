@@ -1,1 +1,162 @@
 /* You can add global styles to this file, and also import other style files */
+@use 'bootstrap/scss/bootstrap';
+@import "../node_modules/bootstrap/scss/bootstrap";
+// styles.scss (global)
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,500;1,500&display=swap');
+
+// ==========================================================================
+// Variáveis globais — Dark Mode
+// ==========================================================================
+$font-family-base: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+$color-primary:        #8AB4F8;
+$color-primary-dark:   #669DF6;
+$color-primary-light:  #AECBFA;
+
+$color-text:            #E8EAED;
+$color-text-muted:      #9AA0A6;
+$color-background:      #202124;
+$color-background-alt:  #292A2D;
+$color-surface:         #303134;
+$color-border:           #3C4043;
+
+$color-success: #81C995;
+$color-danger:  #F28B82;
+$color-warning: #FDD663;
+
+$border-radius-base: 8px;
+$transition-base: all 0.2s ease-in-out;
+
+// ==========================================================================
+// Reset básico
+// ==========================================================================
+
+
+
+* {
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  padding: 20px;
+}
+
+body {
+  font-family: $font-family-base;
+  color: $color-text;
+  background-color: $color-background;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  color: $color-text;
+  margin: 0 0 0.5rem;
+}
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+  transition: $transition-base;
+
+  &:hover {
+    color: $color-primary-light;
+    text-decoration: underline;
+  }
+}
+
+// ==========================================================================
+// Botões
+// ==========================================================================
+.btn-primary {
+  background-color: $color-primary;
+  border-color: $color-primary;
+  color: #202124; // texto escuro sobre botão claro — mantém contraste    
+
+  &:hover,
+  &:focus {
+    background-color: $color-primary-light;
+    border-color: $color-primary-light;
+    color: #202124;
+  }
+
+  &:disabled {
+    background-color: rgba($color-primary, 0.4);
+    border-color: rgba($color-primary, 0.4);
+    color: rgba(#202124, 0.6);
+  }
+  
+}
+
+.btn{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+// ==========================================================================
+// Inputs
+// ==========================================================================
+.form-control {
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  color: $color-text;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    background-color: $color-surface;
+    border-color: $color-primary;
+    color: $color-text;
+    box-shadow: 0 0 0 0.2rem rgba($color-primary, 0.25);
+  }
+}
+
+// ==========================================================================
+// Cards
+// ==========================================================================
+.card {
+  background-color: $color-surface;
+  border-radius: $border-radius-base;
+  border: 1px solid $color-border;
+  color: $color-text;
+}
+
+// ==========================================================================
+// Alertas (usado no login pra erro)
+// ==========================================================================
+.alert-danger {
+  background-color: rgba($color-danger, 0.15);
+  border-color: rgba($color-danger, 0.4);
+  color: $color-danger;
+}
+
+// ==========================================================================
+// Utilitários
+// ==========================================================================
+.text-primary-custom {
+  color: $color-primary !important;
+}
+
+.bg-primary-custom {
+  background-color: $color-primary !important;
+}
+
+.profile-img {
+  width: 75px;
+  height: 75px;
+  object-fit: cover;
+  border-radius: 8px; // opcional, se quiser cantos arredondados
+}
+
