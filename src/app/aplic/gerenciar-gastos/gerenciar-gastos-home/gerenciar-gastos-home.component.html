@@ -1,30 +1,112 @@
 <finnas-header
     [mainButtonTitle]="'Adicionar Gasto'"
-    [pageTitle]="'Gernciamento de Gastos'"
-    (mainButtonClicked)="teste()"
+    [pageTitle]="pageTitle"
+    (mainButtonClicked)="novoGasto()"
 />
 
 <div class="finnas-body">
-    <div class="d-flex gap-3">
-        <table class="table table-hover table-striped table-component">
-            <thead class="table-header">
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Título</th>
-                    <th scope="col">Valor</th>
-                    <th scope="col">Credor</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for(i of list; track i){
-                    <tr innerRows>
-                        <th scope="row"> {{ i.codigo }} </th>
-                        <td> {{ i.titulo }} </td>
-                        <td> {{ i.valor | currency: 'BRL' }} </td>
-                        <td> {{ i.titulo }} </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+
+    <div class="d-flex">
+        
+        <div class="w-50">
+            <div class="w-100 d-flex gap-3 mb-3 mt-3 align-items-center">            
+                <input class="form-control" type="text" placeholder="Pesquisa">
+                <div class="d-flex gap-1">
+                    <button class="btn btn-outline-primary"> Limpar </button>
+                    <button class="btn btn-outline-primary"> Pesquisar </button>
+                </div>
+            </div>
+        
+            <div class="d-flex gap-3">
+                <table class="table table-hover table-component table-borderless table-dark">
+                    <caption class="text-secondary fst-italic">Tabela de Gastos</caption>
+                    <thead class="table-header">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Título</th>
+                            <th scope="col">Valor</th>
+                            <th scope="col">Credor</th>
+                        </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        @for(i of list; track i){
+                            <tr innerRows>
+                                <th scope="row"> {{ i.codigo }} </th>
+                                <td> {{ i.titulo }} </td>
+                                <td> {{ i.valor | currency: 'BRL' }} </td>
+                                <td> {{ i.titulo }} </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="w-50">
+            <!-- <div class="summary-list">
+                <div class="d-flex gap-2">
+                    <span class="">Total:</span>
+                    <span class="fw-semibold">R$ 666,00</span>
+                </div>
+                <div class="d-flex gap-2">
+                    <span class="">Lançamentos:</span>
+                    <span class="fw-semibold">3</span>
+                </div>
+                <div class="d-flex gap-2">
+                    <span class="">Maior:</span>
+                    <span class="fw-semibold">R$ 666,00</span>
+                </div>
+                <div class="d-flex gap-2">
+                    <span class="">Média:</span>
+                    <span class="fw-semibold">R$ 666,00</span>
+                </div>
+            </div> -->
+
+            <div class="d-flex gap-2 justify-content-evenly">
+                <div class="card summary-card">
+                    <div class="card-header text-center">
+                        Total
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">R$ 666,00</h5>
+                    </div>
+                </div>
+
+                <div class="card summary-card">
+                    <div class="card-header">
+                        Lançamentos
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">3</h5>
+                    </div>
+                </div>
+
+                <div class="card summary-card">
+                    <div class="card-header text-center">
+                        Maior
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">R$ 666,00</h5>
+                    </div>
+                </div>
+
+                <div class="card summary-card">
+                    <div class="card-header text-center">
+                        Média
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center">R$ 666,00</h5>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <canvas baseChart [data]="data" [type]="'doughnut'">
+                </canvas>
+            </div>
+
+        </div>
     </div>
+
+
 </div>

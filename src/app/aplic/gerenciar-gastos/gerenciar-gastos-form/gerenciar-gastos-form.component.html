@@ -1,0 +1,86 @@
+<finnas-header
+    [mainButtonTitle]="'Salvar'"
+    [pageTitle]="pageTitle"    
+/>
+
+<div class="finnas-body">
+ 
+    <form [formGroup]="form">
+
+        <div class="d-flex gap-2">
+            <div class="w-50">
+                <label for="" class="form-label"> Valor total </label>
+                <input type="text" class="form-control">
+            </div>
+
+            <div class="w-50">
+                <label for="credor" class="form-label"> Credor </label>
+                <select name="credor" id="credor" class="form-control">
+                    <option value="0" disabled> Selecione uma opção </option>
+                    <option value="1"> Natália </option>
+                    <option value="2"> Nubank </option>
+                    <option value="3"> Banrisul </option>
+                    <option value="4"> Mãe </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="d-flex gap-2 mt-3">
+
+            <div class="w-50">
+                <label for="motivo" class="form-label"> Motivo do Gasto </label>
+                <textarea class="form-control" name="motivo" id="motivo" rows="4"></textarea>
+            </div>
+
+            <div class="w-50">
+
+                <div class="h4 pb-2 mb-4 text-info border-bottom border-info">
+                    Parcelas
+                </div>
+
+                <div class="d-flex">
+                    <div class="w-25 text-center">
+                        <label for="parcelado" class="form-check-label"> É Parcelado? </label>
+                        <input type="checkbox" class="form-check-input ms-3" id="parcelado" [value]="isParcelado">
+                    </div>
+                    <div class="w-75 d-flex gap-3">
+                        <div class="w-50">
+                            <label for="QtdParcelas" class="form-label"> Quantidade de Parcelas </label>
+                            <select class="form-control" name="QtdParcelas" id="QtdParcelas">
+                                <option value="0" selected disabled> Selecione uma opção </option>
+                                <option value="1"> X 1 </option>
+                                <option value="2"> X 2 </option>
+                                <option value="3"> X 3 </option>
+                                <option value="4"> X 4 </option>
+                                <option value="5"> X 5 </option>
+                                <option value="6"> X 6 </option>
+                                <option value="7"> X 7 </option>
+                                <option value="8"> X 8 </option>
+                                <option value="9"> X 9 </option>
+                                <option value="10"> X 10 </option>
+                                <option value="11"> X 11 </option>
+                                <option value="12"> X 12 </option>
+                            </select>
+                            <!-- <input type="text" class="form-control" for="QtdParcelas" id="QtdParcelas"> -->
+                        </div>
+                        <div class="w-50">
+                            <label for="periodoParcela" class="form-label"> Período de pagamento da parcela </label>
+                            <!-- <input type="text" class="form-control" for="QtdParcelas" id="QtdParcelas"> -->
+                            <select class="form-control" name="periodoParcela" id="periodoParcela"> 
+                                <option value="0" selected disabled> Selecione uma opção </option>
+                                <option value="1"> Primeira quinzena </option>
+                                <option value="2"> Segunda quinzena </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+    </form>
+
+</div>
