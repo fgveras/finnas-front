@@ -27,8 +27,8 @@ export const routes: Routes = [
     path: 'gerenciar-gastos'
     , canActivate: [authGuard]
     , title: 'Gerenciar Gastos'
-    , loadComponent: () =>
-      import('./aplic/gerenciar-gastos/gerenciar-gastos-home/gerenciar-gastos-home.component').then(m => m.GerenciarGastosHomeComponent)
+    , loadChildren: () =>
+      import('./aplic/gerenciar-gastos/gerenciar-gastos.route').then(r => r.GERENCIAR_GASTOS_ROUTES)
   },
   {
     path: 'dashboard',
