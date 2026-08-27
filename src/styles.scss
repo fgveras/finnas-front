@@ -167,3 +167,12 @@ a {
   padding: 10px;
   background-color: rgb(53, 52, 52);
 }
+
+.form-select:disabled,
+.form-control:disabled {
+  background-color: $color-surface; // mesma cor de fundo do input normal
+  color: $color-text-muted;          // texto mais apagado, indicando "desabilitado"
+  border-color: $color-border;
+  opacity: 0.7;                       // reforça visualmente que está desabilitado
+  cursor: not-allowed;
+}

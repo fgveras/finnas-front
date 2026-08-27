@@ -15,9 +15,15 @@ export class NovoGastoComponent {
 
   form: FormGroup = new FormGroup({
     FlParcelado: new FormControl<boolean>(false),
+    VlTotal: new FormControl<number | null>(0),   
+    DtPrimeiraParcela: new FormControl<string | null>(null), 
+    QtdParcelas: new FormControl<number>(0)
   })
 
   public isParcelado: boolean = false;
-  public pageTitle: string = 'Novo Gasto';
+  public pageTitle: string = 'Novo Gasto';  
+  public VlParcela: number = this.form.get('VlTotal')?.value / this.form.get('QtdParcelas')?.value;
+
+  
 
 }
