@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderComponent } from "../../../components/header/header.component";
 import { Chart, Legend, plugins, registerables } from 'chart.js';
 import { FormControl, FormGroup, FormGroupDirective, ReactiveFormsModule } from '@angular/forms';
+import { Credores } from '../models/Credores';
+import { GerenciarGastosService } from '../gerenciar-gastos.service';
 
 @Component({
   selector: 'app-gerenciar-gastos-form.component',
@@ -9,9 +11,15 @@ import { FormControl, FormGroup, FormGroupDirective, ReactiveFormsModule } from 
   templateUrl: './gerenciar-gastos-form.component.html',
   styleUrl: './gerenciar-gastos-form.component.scss',
 })
-export class NovoGastoComponent {
+export class NovoGastoComponent implements OnInit {
 
-  constructor(){}
+  constructor(
+    private _service: GerenciarGastosService
+  ){}
+
+  ngOnInit(): void {
+    this.getCredoresList();
+  }
 
   form: FormGroup = new FormGroup({
     FlParcelado: new FormControl<boolean>(false),
@@ -23,7 +31,20 @@ export class NovoGastoComponent {
   public isParcelado: boolean = false;
   public pageTitle: string = 'Novo Gasto';  
   public VlParcela: number = this.form.get('VlTotal')?.value / this.form.get('QtdParcelas')?.value;
-
+  public credoresList: Credores[] = [];
   
+  public getCredoresList(): void {
+
+    this._service.getCredoresList().subscribe({
+      next: (response) => {
+        this.credoresList = response
+      }, error: (err) => {
+
+      }
+    })
+    
+
+  }
+
 
 }

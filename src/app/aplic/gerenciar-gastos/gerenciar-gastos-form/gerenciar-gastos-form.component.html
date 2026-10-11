@@ -17,10 +17,9 @@
                 <label for="credor" class="form-label"> Credor </label>
                 <select name="credor" id="credor" class="form-control">
                     <option value="0" selected disabled> Selecione uma opção </option>
-                    <option value="1"> Natália </option>
-                    <option value="2"> Nubank </option>
-                    <option value="3"> Banrisul </option>
-                    <option value="4"> Mãe </option>
+                    @for(i of this.credoresList; track i){
+                        <option [value]="i.Id"> {{ i.nomeCredor }} </option>
+                    }                
                 </select>
             </div>
         </div>
